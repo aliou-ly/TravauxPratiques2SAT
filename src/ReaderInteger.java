@@ -17,7 +17,7 @@ public class ReaderInteger extends Reader {
         private void nextLine() {
 
         }
-    public boolean hasNextIntInLine() throws NoSuchElementException {
+        private boolean hasNextIntInLine() throws NoSuchElementException {
 
         while(scannerInt.hasNext()) {
             if (scannerInt.hasNextInt())
@@ -28,14 +28,20 @@ public class ReaderInteger extends Reader {
     }
 
     public boolean hasNextInt() {
-        return super.hasNext();
+        if (hasNextIntInLine()) {
+            return true;
+        } else {
+            if ((! hasNext()) && super.hasNext()) {
+                scannerInt = new Scanner(super.next());
+                hasNext();
+                hasNextIntInLine();
+            }
+        }
+        return false;
     }
 
     public int nextInt() {
-        if ((! hasNext()) && super.hasNext()) {
-            scannerInt = new Scanner(super.next());
-            hasNext();
-        }
+
             return scannerInt.nextInt();
     }
 }
