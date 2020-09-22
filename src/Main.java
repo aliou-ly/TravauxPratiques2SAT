@@ -12,10 +12,13 @@ public class Main {
 
     public static void main(String[] args) throws IOException {
         ReaderInteger readerInteger = new ReaderInteger(new File ("/amuhome/l19027109/Téléchargements/formule-2-sat.txt"));
-        readerInteger.nextInt();
-        readerInteger.nextInt();
-        readerInteger.nextInt();
-        System.out.println(readerInteger.nextInt());
+
+       /*for (String string: readerInteger) {
+           System.out.println(string);
+       };*/
+        while (readerInteger.hasNextInt()){
+            System.out.print(readerInteger.nextInt()+"\t");
+        }
 
     }
 

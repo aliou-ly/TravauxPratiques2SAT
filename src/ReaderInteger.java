@@ -1,7 +1,5 @@
 import java.io.File;
 import java.io.FileNotFoundException;
-import java.util.ArrayList;
-import java.util.Iterator;
 import java.util.NoSuchElementException;
 import java.util.Scanner;
 
@@ -14,34 +12,28 @@ public class ReaderInteger extends Reader {
                 scannerInt = new Scanner(super.next());
         }
 
-        private void nextLine() {
-
-        }
         private boolean hasNextIntInLine() throws NoSuchElementException {
 
-        while(scannerInt.hasNext()) {
-            if (scannerInt.hasNextInt())
-                return scannerInt.hasNextInt();
-            scannerInt.next();
-        }
-        return false;
-    }
-
-    public boolean hasNextInt() {
-        if (hasNextIntInLine()) {
-            return true;
-        } else {
-            if ((! hasNext()) && super.hasNext()) {
-                scannerInt = new Scanner(super.next());
-                hasNext();
-                hasNextIntInLine();
+            while(scannerInt.hasNext()) {
+                if (scannerInt.hasNextInt())
+                    return scannerInt.hasNextInt();
+                scannerInt.next();
             }
+            return false;
         }
-        return false;
-    }
 
-    public int nextInt() {
+        public boolean hasNextInt() {
+            if (hasNextIntInLine()) {
+                return hasNextIntInLine();
+            }
+            while ((!hasNextIntInLine()) && (super.hasNext())){
+                scannerInt = new Scanner(super.next());
+            }
+            return hasNextIntInLine();
+        }
 
+        public int nextInt() {
+            hasNextInt();
             return scannerInt.nextInt();
-    }
+        }
 }
