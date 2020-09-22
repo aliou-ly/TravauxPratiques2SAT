@@ -12,7 +12,7 @@ public class ReaderInteger extends Reader {
                 scannerInt = new Scanner(super.next());
         }
 
-        private boolean hasNextIntInLine() throws NoSuchElementException {
+        private boolean hasNextIntInLine() {
 
             while(scannerInt.hasNext()) {
                 if (scannerInt.hasNextInt())
@@ -32,7 +32,7 @@ public class ReaderInteger extends Reader {
             return hasNextIntInLine();
         }
 
-        public int nextInt() {
+        public int nextInt() throws NoSuchElementException {
             hasNextInt();
             return scannerInt.nextInt();
         }
