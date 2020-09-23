@@ -1,3 +1,4 @@
+
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.util.Scanner;
@@ -27,7 +28,8 @@ public class ReaderInt extends Reader {
             hasNextIntInLine();
         return scannerInt.nextInt();
     }
-        /*public boolean hasNextInt() {
+
+    /*public boolean hasNextInt() {
             if (hasNextIntInLine()) {
                 return hasNextIntInLine();
             }
@@ -39,8 +41,7 @@ public class ReaderInt extends Reader {
         }
 
         public int nextInt() throws NoSuchElementException {
-            //hasNextInt();
-           // hasNextInt();z
+           // hasNextInt();
             return scannerInt.nextInt();
         }
 

@@ -1,3 +1,4 @@
+package com.utils;
 import com.company.Graph;
 
 import java.awt.*;
@@ -7,7 +8,7 @@ import java.io.IOException;
 
 public class Utils {
 
-        static File write(Graph<Label> graph) throws IOException {
+        public static File write(Graph<Label> graph) throws IOException {
             File file = new File("./graph.txt");
             FileWriter writer = new FileWriter(file);
 

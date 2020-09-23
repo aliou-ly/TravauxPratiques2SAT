@@ -1,13 +1,11 @@
-import com.company.Graph;
-
-import java.awt.*;
 import java.io.File;
-import java.io.FileNotFoundException;
-import java.io.FileWriter;
 import java.io.IOException;
 
 public class Main {
     public static void main(String[] args) throws IOException {
+        File file = new File ("./formule-conflict.txt");
+        CreateGraph createGraph = new CreateGraph(file);
+        System.out.println(createGraph.inverseGraph());
     }
 
 

@@ -1,10 +1,11 @@
+
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.util.Iterator;
 import java.util.Scanner;
 
     public class Reader implements Iterator<String>, Iterable<String> {
-        private Scanner scanner;
+        private final Scanner scanner;
 
         Reader(File file) throws FileNotFoundException {
             scanner = new Scanner(file);
