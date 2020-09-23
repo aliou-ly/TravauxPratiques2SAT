@@ -33,10 +33,9 @@ public class Graph<Label> {
         return cardinal;
     }
 
-    public void addArc(int source, int dest, Label label) {
-        incidency.get(source).addLast(new Edge(source,dest,label));
+    public void addArc(int source, int dest, String label) {
+        incidency.get(source).addLast(new Edge(source,dest, (Label) label));
     }
-
     public String toString() {
         String result = new String("");
         result = result.concat(cardinal + "\n");
@@ -46,7 +45,6 @@ public class Graph<Label> {
                         + e.label.toString() + "\n");
 
             }
-            System.out.println(result);
         }
         return result;
 
