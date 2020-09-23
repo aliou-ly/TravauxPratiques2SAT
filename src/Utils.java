@@ -1,12 +1,13 @@
 import com.company.Graph;
 
+import java.awt.*;
 import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
 
 public class Utils {
 
-        static File write(Graph graph) throws IOException {
+        static File write(Graph<Label> graph) throws IOException {
             File file = new File("./graph.txt");
             FileWriter writer = new FileWriter(file);
 
