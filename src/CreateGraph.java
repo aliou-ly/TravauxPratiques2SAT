@@ -1,4 +1,3 @@
-
 import com.company.Graph;
 import com.utils.Utils;
 
@@ -14,10 +13,9 @@ public class CreateGraph {
 
     CreateGraph(File file) throws FileNotFoundException {
         this.reader = new ReaderInt(file);
-        reader.toNewline();
 
-        graph = new Graph<>(2* reader.nextIntInLine());
-        clauseNumber = reader.nextIntInLine();
+        graph = new Graph<>(2* reader.nextInt());
+        clauseNumber = reader.nextInt();
         addClausesIncidences();
     }
 
@@ -25,7 +23,7 @@ public class CreateGraph {
 
     private void clauseToEdges(int literalOne, int literalTwo){
         if (literalOne > 0 && literalTwo < 0) {
-            addArc(graph,
+            graph.addArc(
                     literalToIndex(literalTwo),
                     literalToIndex(literalOne),
                     createLabel(literalTwo,literalOne)
@@ -58,15 +56,12 @@ public class CreateGraph {
         );
     }
 
-    private static void addArc(Graph<Label> graph, int source, int destination,String label) {
-        graph.addArc(source,destination,label);
-    }
 
     private static String createLabel(int literalOne, int literalTwo) {
         return "E(" + literalOne + "=>" + literalTwo + ")";
     }
 
-    //OK
+
     private int literalToIndexOpposite(int literal) {
         if (literal < 0) {
             return Math.abs(literal)-1;
@@ -74,7 +69,7 @@ public class CreateGraph {
         return graph.order()-literal;
     }
 
-    //OK
+
     private int literalToIndex(int literal) {
         if (literal > 0) {
             return literal-1;
@@ -82,7 +77,7 @@ public class CreateGraph {
         return graph.order()+literal;
     }
 
-    //OK
+
      private void addClausesIncidences() {
         do {
             reader.toNewline();

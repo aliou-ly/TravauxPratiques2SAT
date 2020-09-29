@@ -3,9 +3,8 @@ import java.io.IOException;
 
 public class Main {
     public static void main(String[] args) throws IOException {
-        File file = new File ("./formule-conflict.txt");
-        CreateGraph createGraph = new CreateGraph(file);
-        System.out.println(createGraph.inverseGraph());
+        ReaderInt readerInt = new ReaderInt(new File("./formule-2-sat.txt"));
+        System.out.println(readerInt.nextInt()+"\t"+readerInt.nextInt());
     }
 
 
