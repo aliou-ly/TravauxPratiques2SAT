@@ -2,6 +2,7 @@ package com.company;
 
 import java.util.ArrayList;
 import java.util.LinkedList;
+import java.util.List;
 
 public class Graph<Label> {
 
@@ -31,6 +32,14 @@ public class Graph<Label> {
 
     public int order() {
         return cardinal;
+    }
+
+    public List<Integer> listAdjacentTo(int source) {
+        ArrayList<Integer> list = new ArrayList<>();
+        for (Edge e : incidency.get(source)) {
+            list.add(e.destination);
+        }
+        return list;
     }
 
     public void addArc(int source, int dest, String label) {

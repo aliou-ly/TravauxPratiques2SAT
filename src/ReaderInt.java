@@ -12,12 +12,11 @@ public class ReaderInt<Integer> extends ReadFile<java.lang.Integer> {
         toNewline();
     }
 
-    void toNewline() {
-        if (scannerFile.hasNextLine())
-            scannerInt = new Scanner(scannerFile.nextLine());
+    private void toNewline() {
+        scannerInt = new Scanner(scannerFile.nextLine());
     }
 
-    public boolean hasNextIntInLine() {
+    private boolean hasNextIntInLine() {
 
         while (scannerInt.hasNext()) {
             if (scannerInt.hasNextInt()) {
