@@ -4,46 +4,42 @@ import java.io.FileNotFoundException;
 import java.util.NoSuchElementException;
 import java.util.Scanner;
 
-public class ReaderInt extends Reader {
+public class ReaderInt<Integer> extends ReadFile<java.lang.Integer> {
     private Scanner scannerInt;
 
-        ReaderInt(File file) throws FileNotFoundException {
-            super(file);
-            toNewline();
-        }
-    void toNewline(){
-        if (super.hasNext())
-            scannerInt = new Scanner(super.next());
+    ReaderInt(File file) throws FileNotFoundException {
+        super(file);
+        toNewline();
     }
+
+    void toNewline() {
+        if (scannerFile.hasNextLine())
+            scannerInt = new Scanner(scannerFile.nextLine());
+    }
+
     public boolean hasNextIntInLine() {
 
-            while(scannerInt.hasNext()) {
-                if (scannerInt.hasNextInt()) {
-                    return scannerInt.hasNextInt();
-                }
-                scannerInt.next();
+        while (scannerInt.hasNext()) {
+            if (scannerInt.hasNextInt()) {
+                return true;
             }
-            return false;
+            scannerInt.next();
         }
-    public int nextIntInLine() {
-            hasNextIntInLine();
-        return scannerInt.nextInt();
+        return false;
     }
 
-    public boolean hasNextInt() {
-            if (hasNextIntInLine()) {
-                return hasNextIntInLine();
-            }
+    @Override
+    public boolean hasNext() {
 
-            while ((!hasNextIntInLine()) && (super.hasNext())){
-               toNewline();
-            }
-            return hasNextIntInLine();
+        while ((!hasNextIntInLine()) && (scannerFile.hasNextLine())){
+            toNewline();
         }
+        return hasNextIntInLine();
+    }
 
-        public int nextInt() throws NoSuchElementException {
-            hasNextInt();
-            return scannerInt.nextInt();
-        }
-
+    @Override
+    public java.lang.Integer next() throws NoSuchElementException {
+        hasNext();
+        return scannerInt.nextInt();
+    }
 }

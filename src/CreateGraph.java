@@ -8,14 +8,14 @@ import java.io.IOException;
 
 public class CreateGraph {
     private static Graph<Label> graph;
-    private final ReaderInt reader;
+    private final ReadFile<Integer> reader;
     private int clauseNumber;
 
     CreateGraph(File file) throws FileNotFoundException {
-        this.reader = new ReaderInt(file);
+        reader = new ReaderInt(file);
 
-        graph = new Graph<>(2* reader.nextInt());
-        clauseNumber = reader.nextInt();
+        graph = new Graph<>(2* reader.next());
+        clauseNumber = reader.next();
         addClausesIncidences();
     }
 
@@ -29,59 +29,33 @@ public class CreateGraph {
                     createLabel(literalTwo,literalOne)
             );
             return;
-        }
-
-        if (literalTwo > 0 && literalOne < 0){
+        } else if (literalOne < 0 && literalTwo > 0) {
             graph.addArc(
                     literalToIndex(literalOne),
                     literalToIndex(literalTwo),
                     createLabel(literalOne,literalTwo)
             );
             return;
+        } else {
+                graph.addArc(
+                    literalToIndexOpposite(literalOne),
+                    literalToIndex(literalTwo),
+                    createLabel(-literalOne, literalTwo)
+                );
+
+                graph.addArc(
+                    literalToIndexOpposite(literalTwo),
+                    literalToIndex(literalOne),
+                    createLabel(-literalTwo, literalOne)
+                );
         }
-
-        /* (literalOne > 0 && literalTwo > 0) or (literalOne < 0 && literalTwo < 0)
-            Clause gives two edges
-         */
-        graph.addArc(
-                literalToIndexOpposite(literalOne),
-                literalToIndex(literalTwo),
-                createLabel(-literalOne,literalTwo)
-        );
-
-        graph.addArc(
-                literalToIndexOpposite(literalTwo),
-                literalToIndex(literalOne),
-                createLabel(-literalTwo,literalOne)
-        );
-    }
-
-
-    private static String createLabel(int literalOne, int literalTwo) {
-        return "E(" + literalOne + "=>" + literalTwo + ")";
-    }
-
-
-    private int literalToIndexOpposite(int literal) {
-        if (literal < 0) {
-            return Math.abs(literal)-1;
-        }
-        return graph.order()-literal;
-    }
-
-
-    private int literalToIndex(int literal) {
-        if (literal > 0) {
-            return literal-1;
-        }
-        return graph.order()+literal;
     }
 
 
      private void addClausesIncidences() {
         do {
-            reader.toNewline();
-            clauseToEdges(reader.nextIntInLine(),reader.nextIntInLine());
+            clauseToEdges(reader.next(),reader.next());
+            reader.next();
         } while (reader.hasNext()&& (--clauseNumber) > 0);
     }
 
@@ -90,24 +64,43 @@ public class CreateGraph {
     }
 
     public static Graph<Label> inverseGraph(Graph<Label> graph) throws IOException {
-        ReaderInt reader = new ReaderInt(Utils.write(graph));
-        Graph<Label> graph1 = new Graph<>(reader.nextIntInLine());
+        ReadFile<Integer> reader;
+        reader = new ReaderInt(Utils.write(graph));
+        Graph<Label> graph1 = new Graph<>(reader.next());
 
         addInverseEdges(graph1,reader);
         return graph1;
     }
 
-    private static void addInverseEdges(Graph<Label> graph, ReaderInt reader) {
+    private static void addInverseEdges(Graph<Label> graph, ReadFile<Integer> reader) {
 
-        do {
-            reader.toNewline();
-            int destination = reader.nextIntInLine();
-            int source = reader.nextIntInLine();
-            String label = createLabel(indexToLiteral(source,graph),
+        while (reader.hasNext()) {
+            int destination = reader.next();
+            int source = reader.next();
+            String label = createLabel(
+                    indexToLiteral(source,graph),
                     indexToLiteral(destination,graph)
             );
             graph.addArc(source,destination,label);
-        } while (reader.hasNext());
+        }
+    }
+
+    private static String createLabel(int literalOne, int literalTwo) {
+        return "E(" + literalOne + "=>" + literalTwo + ")";
+    }
+
+    private int literalToIndex(int literal) {
+        if (literal > 0) {
+            return literal-1;
+        }
+        return graph.order()+literal;
+    }
+
+    private int literalToIndexOpposite(int literal) {
+        if (literal < 0) {
+            return Math.abs(literal)-1;
+        }
+        return graph.order()-literal;
     }
 
     private static int indexToLiteral(int index, Graph<Label> graph) {

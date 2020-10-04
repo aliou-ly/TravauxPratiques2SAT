@@ -1,29 +1,21 @@
-
 import java.io.File;
 import java.io.FileNotFoundException;
-import java.util.Iterator;
-import java.util.Scanner;
 
-    public class Reader implements Iterator<String>, Iterable<String> {
-        private final Scanner scanner;
+    public class Reader<String> extends ReadFile<String> {
 
         Reader(File file) throws FileNotFoundException {
-            scanner = new Scanner(file);
+            super(file);
         }
 
         @Override
         public boolean hasNext() {
-            return scanner.hasNextLine();
+            return scannerFile.hasNextLine();
         }
 
         @Override
         public String next() {
-            return scanner.nextLine();
+            return (String) scannerFile.nextLine();
         }
 
-        @Override
-        public Iterator<String> iterator() {
-            return this;
-        }
     }
 
