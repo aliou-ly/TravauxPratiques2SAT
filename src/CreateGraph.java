@@ -21,6 +21,21 @@ public class CreateGraph {
 
     public Graph<Label> getGraph() { return graph; }
 
+    public Graph<Label> invGraph(Graph<Label> graph) {
+        Graph<Label> invGraph = new Graph<>(graph.order());
+
+        for (int source = 0; source < graph.order(); source++) {
+            for (int destination: graph.listAdjacentTo(source)) {
+                String label = createLabel(
+                        indexToLiteral(destination,graph),
+                        indexToLiteral(source,graph));
+                invGraph.addArc(destination,source, label);
+            }
+        }
+
+        return null;
+    }
+
     private void clauseToEdges(int literalOne, int literalTwo){
         if (literalOne > 0 && literalTwo < 0) {
             graph.addArc(
