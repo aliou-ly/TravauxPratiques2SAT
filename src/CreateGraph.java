@@ -7,14 +7,14 @@ import java.io.FileNotFoundException;
 import java.io.IOException;
 
 public class CreateGraph {
-    private static Graph<Label> graph;
+    private final Graph<Label> graph;
     private final ReadFile<Integer> reader;
     private int clauseNumber;
 
     CreateGraph(File file) throws FileNotFoundException {
         reader = new ReaderInt(file);
 
-        graph = new Graph<>(2* reader.next());
+        graph = new Graph<>(2*reader.next());
         clauseNumber = reader.next();
         addClausesIncidences();
     }

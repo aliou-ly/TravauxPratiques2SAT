@@ -4,16 +4,18 @@ import java.io.IOException;
 
 public class Main {
     public static void main(String[] args) throws IOException {
-        CreateGraph graph = new CreateGraph(new File("formule-2-sat.txt"));
-        DepthFirstSearch depthFirstSearch =
-                        new DepthFirstSearch(graph.getGraph());
-        DepthFirstSearch depth = new DepthFirstSearch(graph.inverseGraph());
-        depthFirstSearch.explore();
-        depth.exploreFlowingStack(depthFirstSearch.stackOfFinalDiscovered);
+        CreateGraph graph = new CreateGraph(new File("formule-conflict.txt"));
+        StronglyConnectedComponents components =
+                new StronglyConnectedComponents(graph.getGraph());
 
-           while ( !depth.connexes.empty())
-               System.out.println(depth.connexes.pop().toString());
+        StronglyConnectedComponents components1 =
+                new StronglyConnectedComponents(graph.inverseGraph());
 
+        while (! components1.depthSearchInverseGraph.connexes.empty())
+            System.out.println(components1.depthSearchInverseGraph.connexes.pop());
+        System.out.println("================================================");
 
+        while (! components.depthSearchInverseGraph.connexes.empty())
+            System.out.println(components.depthSearchInverseGraph.connexes.pop());
     }
 }

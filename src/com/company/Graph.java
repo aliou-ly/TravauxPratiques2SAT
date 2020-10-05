@@ -36,15 +36,15 @@ public class Graph<Label> {
 
     public List<Integer> listAdjacentTo(int source) {
         ArrayList<Integer> list = new ArrayList<>();
-        for (Edge e : incidency.get(source)) {
-            list.add(e.destination);
-        }
+
+        for (Edge e : incidency.get(source)) { list.add(e.destination); }
         return list;
     }
 
     public void addArc(int source, int dest, String label) {
         incidency.get(source).addLast(new Edge(source,dest, (Label) label));
     }
+
     public String toString() {
         String result = new String("");
         result = result.concat(cardinal + "\n");
@@ -52,12 +52,9 @@ public class Graph<Label> {
             for (Edge e : incidency.get(i)) {
                 result = result.concat(e.source + " " + e.destination + " "
                         + e.label.toString() + "\n");
-
             }
         }
         return result;
 
     }
-
-
 }

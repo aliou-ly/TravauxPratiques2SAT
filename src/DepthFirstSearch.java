@@ -45,10 +45,8 @@ public class DepthFirstSearch {
             if (colors[source] == Color.White) {
                 connexes.push(new LinkedList<>());
                 explore(source);
-                System.out.print(source + "\t");
             }
         }
-        System.out.println();
     }
 
     public Stack<Integer> StackOfFinalDiscovered() {

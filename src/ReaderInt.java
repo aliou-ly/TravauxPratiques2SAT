@@ -19,9 +19,7 @@ public class ReaderInt<Integer> extends ReadFile<java.lang.Integer> {
     private boolean hasNextIntInLine() {
 
         while (scannerInt.hasNext()) {
-            if (scannerInt.hasNextInt()) {
-                return true;
-            }
+            if (scannerInt.hasNextInt()) { return true; }
             scannerInt.next();
         }
         return false;
