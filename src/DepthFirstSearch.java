@@ -1,34 +1,31 @@
 import com.company.Graph;
 
+import java.awt.*;
 import java.util.Arrays;
 import java.util.LinkedList;
 import java.util.Stack;
 
 public class DepthFirstSearch {
-    private enum Color {
-        White,
-        Black,
-        Grey
-    }
-
-    public Stack<Integer> stackOfFinalDiscovered = new Stack<>();
-    private int date = 0;
-    //private
-    final int[] dates;
-    //private
-    final int[] finalDates;
+    private enum Color {White, Black, Grey }
     private final Color[] colors;
-    //private
-    final int[] parents;
-    private final Graph graph;
 
-    public Stack<LinkedList<Integer>> getConnexes() {
-        return connexes;
+    private Stack<Integer> stackOfFinalDiscovered = new Stack<>();
+    private Stack<LinkedList<Integer>> waysExploration = new Stack<>();
+
+    private int date = 0;
+    private final int[] dates;
+    private final int[] finalDates;
+
+    private final int[] parents;
+    private final Graph<Label> graph;
+
+
+    public Stack<LinkedList<Integer>> getWaysExploration() {
+        return waysExploration;
     }
 
-    public Stack<LinkedList<Integer>> connexes = new Stack<>();
 
-    public DepthFirstSearch(Graph graph) {
+    public DepthFirstSearch(Graph<Label> graph) {
         this.graph = graph;
         colors = new Color[graph.order()];
         parents = new int[graph.order()];
@@ -43,7 +40,7 @@ public class DepthFirstSearch {
     public void explore() {
         for (int source = 0; source < graph.order(); source++) {
             if (colors[source] == Color.White) {
-                connexes.push(new LinkedList<>());
+                waysExploration.push(new LinkedList<>());
                 explore(source);
             }
         }
@@ -55,7 +52,7 @@ public class DepthFirstSearch {
 
     public void explorable(int source) {
         if (isWhite(source)) {
-            connexes.push(new LinkedList<>());
+            waysExploration.push(new LinkedList<>());
             explore(source);
         }
     }
@@ -76,7 +73,7 @@ public class DepthFirstSearch {
         date++;
         dates[source] = date;
         colors[source] = Color.Grey;
-        connexes.peek().add(source);
+        waysExploration.peek().add(source);
         for (Object adjacent: graph.listAdjacentTo(source)) {
 
             if (isWhite((int) adjacent)) {

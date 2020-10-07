@@ -20,4 +20,9 @@ public class Clause<Literal> implements Clauses<Literal> {
         return listOfLiteral.get(index);
     }
 
+    @Override
+    public int size() {
+        return listOfLiteral.size();
+    }
+
 }

@@ -1,20 +1,26 @@
 import com.company.Graph;
 
+import java.awt.*;
 import java.io.IOException;
+import java.util.Collection;
+import java.util.LinkedList;
 
 public class StronglyConnectedComponents {
-    Graph graph;
-    DepthFirstSearch depthSearchGraph;
-    DepthFirstSearch depthSearchInverseGraph;
-    public StronglyConnectedComponents(Graph graph) throws IOException {
-        this.graph = graph;
+    private DepthFirstSearch depthSearchGraph;
+    private DepthFirstSearch depthSearchInverseGraph;
+
+    public StronglyConnectedComponents(Graph<Label> graph, Graph<Label> inverseGraph) {
         depthSearchGraph = new DepthFirstSearch(graph);
         depthSearchInverseGraph =
-                new DepthFirstSearch(CreateGraph.inverseGraph(graph));
+                new DepthFirstSearch(inverseGraph);
         connectedComponents();
     }
 
-    private void connectedComponents() throws IOException {
+    public Collection<LinkedList<Integer>> StronglyConnected() {
+        return depthSearchInverseGraph.getWaysExploration();
+    }
+
+    private void connectedComponents() {
 
         depthSearchGraph.explore();
         depthSearchInverseGraph.exploreFlowingStack(

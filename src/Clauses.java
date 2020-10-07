@@ -1,11 +1,12 @@
 import java.util.List;
 
-public interface Clauses<E> {
-    List<E> listOfLiteral();
+public interface Clauses<Literal> {
 
-    E getIndexOf(int index);
+    List<Literal> listOfLiteral();
+
+    Literal getIndexOf(int index);
 
     default int size() {
         return listOfLiteral().size();
-    };
+    }
 }
