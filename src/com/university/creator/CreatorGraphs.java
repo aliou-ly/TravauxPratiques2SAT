@@ -1,5 +1,5 @@
+package com.university.creator;
 import com.company.Graph;
-
 import java.awt.*;
 
 public interface CreatorGraphs {

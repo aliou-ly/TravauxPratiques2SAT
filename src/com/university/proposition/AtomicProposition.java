@@ -1,4 +1,6 @@
-public class AtomicProposition<Integer> implements Literal<java.lang.Integer> {
+package com.university.proposition;
+
+public class AtomicProposition<Integer> implements Literal<Integer> {
     private final int atomicProposition;
 
     public AtomicProposition(int atomicProp) {
@@ -11,13 +13,13 @@ public class AtomicProposition<Integer> implements Literal<java.lang.Integer> {
     }
 
     @Override
-    public java.lang.Integer getValue() {
+    public int getValue() {
         return atomicProposition;
     }
 
     @Override
-    public Literal<java.lang.Integer> opposite() {
-        return new AtomicProposition<Integer>(-atomicProposition);
+    public Literal<Integer> opposite() {
+        return new AtomicProposition<>(-atomicProposition);
     }
 
     @Override

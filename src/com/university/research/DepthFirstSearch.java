@@ -1,3 +1,5 @@
+package com.university.research;
+
 import com.company.Graph;
 
 import java.awt.*;
@@ -52,7 +54,6 @@ public class DepthFirstSearch {
 
     public void explorable(int source) {
         if (isWhite(source)) {
-            waysExploration.push(new LinkedList<>());
             explore(source);
         }
     }
@@ -61,6 +62,7 @@ public class DepthFirstSearch {
         int source;
         while( ! stack.empty() ) {
             source = stack.pop();
+            waysExploration.push(new LinkedList<>());
             explorable(source);
         }
     }
@@ -73,7 +75,7 @@ public class DepthFirstSearch {
         date++;
         dates[source] = date;
         colors[source] = Color.Grey;
-        waysExploration.peek().add(source);
+       waysExploration.peek().add(source);
         for (Object adjacent: graph.listAdjacentTo(source)) {
 
             if (isWhite((int) adjacent)) {

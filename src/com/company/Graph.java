@@ -41,6 +41,7 @@ public class Graph<Label> {
         return list;
     }
 
+
     public void addArc(int source, int dest, String label) {
         incidency.get(source).addLast(new Edge(source,dest, (Label) label));
     }

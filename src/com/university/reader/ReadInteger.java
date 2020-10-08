@@ -1,13 +1,13 @@
-
+package com.university.reader;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.util.NoSuchElementException;
 import java.util.Scanner;
 
-public class ReaderInt<Integer> extends ReadFile<java.lang.Integer> {
+public class ReadInteger extends ReadFile<Integer> {
     private Scanner scannerInt;
 
-    ReaderInt(File file) throws FileNotFoundException {
+    public ReadInteger(File file) throws FileNotFoundException {
         super(file);
         toNewline();
     }
