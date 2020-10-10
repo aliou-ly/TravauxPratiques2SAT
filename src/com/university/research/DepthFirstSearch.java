@@ -41,10 +41,7 @@ public class DepthFirstSearch {
 
     public void explore() {
         for (int source = 0; source < graph.order(); source++) {
-            if (colors[source] == Color.White) {
-                waysExploration.push(new LinkedList<>());
-                explore(source);
-            }
+            exploration(source);
         }
     }
 
@@ -52,8 +49,9 @@ public class DepthFirstSearch {
         return stackOfFinalDiscovered;
     }
 
-    public void explorable(int source) {
+    private void exploration(int source) {
         if (isWhite(source)) {
+            waysExploration.push(new LinkedList<>());
             explore(source);
         }
     }
@@ -62,8 +60,7 @@ public class DepthFirstSearch {
         int source;
         while( ! stack.empty() ) {
             source = stack.pop();
-            waysExploration.push(new LinkedList<>());
-            explorable(source);
+            exploration(source);
         }
     }
 
